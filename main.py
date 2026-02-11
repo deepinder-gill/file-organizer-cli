@@ -31,6 +31,7 @@ class file_handling():
           if  os.path.isdir(folder_path):
             files = os.listdir(folder_path)
             for file in files:
+              moved = False
               extension = os.path.splitext(file)[1].lower()
               for folder_name, extensions in file_type.items():
                 if extension in extensions:
@@ -41,7 +42,9 @@ class file_handling():
                   move_to = os.path.join(folder_path, folder_name)
                   os.makedirs(move_to, exist_ok=True)
                   shutil.move(file_path, move_to)
+                  print(f"{file_path} moved to {move_to}")
                   moved = True
+                  break
                 
               if not moved :
                 move_to = os.path.join(folder_path, "UNKNOWN")
